@@ -25,6 +25,7 @@ import static utils.CustomerValidations.parseDate;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import customer.Customer;
@@ -35,7 +36,6 @@ public class CustomerManagement
 	{
 		try(Scanner sc=new Scanner(System.in))
 		{
-			int counter=0;
 			boolean exit=false;
 			System.out.println("Welcome.....");	
 			ArrayList<Customer> customer =new ArrayList<Customer>();
@@ -55,33 +55,50 @@ public class CustomerManagement
 						{
 							case 1: System.out.println("------------------------------------------------------------------------------------");
 									System.out.println("Welcome in registration field.....");
-										System.out.println("name, emailId, password, registrationAmount, birthDate, Customer type");
-										customer.add(valdateAllInput(customer,sc.next(),sc.next(),sc.next(),sc.nextDouble(),sc.next(),sc.next()));
+									System.out.println("name, emailId, password, registrationAmount, birthDate, Customer type");
+									customer.add(valdateAllInput(customer,sc.next(),sc.next(),sc.next(),sc.nextDouble(),sc.next(),sc.next()));
 									break;
 									
 							case 2: System.out.println("------------------------------------------------------------------------------------");
 									System.out.println("ALL customer info .....");
 									for(Customer customer2:customer)
-									{
 											System.out.println(customer2.toString());
-									}
 									break;
 									
+									/*
+									 * 2.3 Fetch Customer Details
+									 * I/P : email , dob
+									 * Return customer details , if found , otherwise display error mesg , via custom exception & catch block
+								     * API : indexOf , get
+									 */
 							case 3: boolean flag=false;
 									System.out.println("------------------------------------------------------------------------------------");
 									System.out.println("Enter EmailId and DOB :");
-									Customer customer31=new Customer(sc.next(), parseDate(sc.next()));
+									Customer customer3=new Customer(sc.next(), parseDate(sc.next()));
 									System.out.println("Customer Details.....");
-									for (Customer customer2:customer) 
+									/*for (Customer customer2:customer) 
 									{
-										if(customer2.equals(customer31))
+										if(customer2.equals(customer3))
 										{
 											System.out.println("Customer info of enter id and DOB \n" +customer2);
 											System.out.println("Customer found at index "+customer.indexOf(customer2));
 											flag=true;
 											break;
 										}								
+									}*/
+									int i=-1;
+									Iterator<Customer> itr=customer.iterator();
+									while(itr.hasNext())
+									{
+										Customer c=itr.next();
+										if(c.equals(customer3))
+										{
+											i= customer.indexOf(c);
+											flag=true;
+										}
 									}
+									if ( i != -1 )
+										System.out.println(customer.get(i).toString()+"\n found at index: "+i);
 									if(!flag)
 										throw new CustomerHandlingException("No Record found..");
 									break;
@@ -118,17 +135,6 @@ Choose Option..
 ------------------------------------------------------------------------------------
 Welcome in registration field.....
 name, emailId, password, registrationAmount, birthDate, Customer type
-vinod vinod123@.com vinod123# 500 1995-02-15 PLATINUM
-------------------------------------------------------------------------------------
-Choose Option..
-1.Customer Registration.
-2.Display all customer details.
-3.Fetch Customer Details.
-4.Exit.
-1
-------------------------------------------------------------------------------------
-Welcome in registration field.....
-name, emailId, password, registrationAmount, birthDate, Customer type
 rohit  rauti3@gma.com rauti123@# 25000 1992-12-10 silver
 ------------------------------------------------------------------------------------
 Choose Option..
@@ -151,8 +157,7 @@ Choose Option..
 ------------------------------------------------------------------------------------
 Welcome in registration field.....
 name, emailId, password, registrationAmount, birthDate, Customer type
-rohit  rauti3@gma.com rauti123@# 25000 1992-12-10 silver
-exception.CustomerHandlingException: EmailId already exist....
+vinod vinod123@.com vinod123# 500 1995-02-15 PLATINUM
 ------------------------------------------------------------------------------------
 Choose Option..
 1.Customer Registration.
@@ -162,9 +167,9 @@ Choose Option..
 2
 ------------------------------------------------------------------------------------
 ALL customer info .....
-Customer [name=vinod, emailId=vinod123@.com, registrationAmount=500.0, customerType=PLATINUM, birthDate=1995-02-15]
 Customer [name=rohit, emailId=rauti3@gma.com, registrationAmount=25000.0, customerType=SILVER, birthDate=1992-12-10]
 Customer [name=Samadhan, emailId=samad563@g.com, registrationAmount=20000.0, customerType=GOLD, birthDate=1997-02-19]
+Customer [name=vinod, emailId=vinod123@.com, registrationAmount=500.0, customerType=PLATINUM, birthDate=1995-02-15]
 ------------------------------------------------------------------------------------
 Choose Option..
 1.Customer Registration.
@@ -174,18 +179,19 @@ Choose Option..
 3
 ------------------------------------------------------------------------------------
 Enter EmailId and DOB :
-sagah@12.com 1997-02-19
+samad563@g.com 1997-02-19
 Customer Details.....
-exception.CustomerHandlingException: No Record found..
+Customer [name=Samadhan, emailId=samad563@g.com, registrationAmount=20000.0, customerType=GOLD, birthDate=1997-02-19]
+ found at index: 1
 ------------------------------------------------------------------------------------
 Choose Option..
 1.Customer Registration.
 2.Display all customer details.
 3.Fetch Customer Details.
 4.Exit.
-	
 4
 ------------------------------------------------------------------------------------
 Terminating bye !!!!!!!!!!
  */
+ 
  
