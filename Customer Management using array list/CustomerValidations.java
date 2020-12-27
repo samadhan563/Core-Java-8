@@ -91,14 +91,13 @@ public class CustomerValidations
 	public static void emailIdDuplication(ArrayList<Customer> customers, String emailId, LocalDate birthDate) throws CustomerHandlingException
 	{
 		Customer cust=new Customer(emailId, birthDate);
-		for(Customer customer:customers)
-		{
-			//if(customer != null )
-			//{
-				if(cust.equals(customer))
-					throw new CustomerHandlingException("EmailId already exist....");	
-			//}
-		}				
+		if(customers.contains(cust))
+			throw new CustomerHandlingException("EmailId already exist....");
+		/*
+		 * for(Customer customer:customers) { //if(customer != null ) //{
+		 * if(cust.equals(customer)) throw new
+		 * CustomerHandlingException("EmailId already exist...."); //} }
+		 */				
 	}
 	
 	/*
@@ -110,6 +109,7 @@ public class CustomerValidations
 		if(!password.matches(regexp))
 			throw new CustomerHandlingException("Password length should be more than 8 or less than 16 and contais Special charactor");
 	}
+	
 	/*
 	 * reg amount must be in the multiples of 500
 	 */
@@ -126,9 +126,19 @@ public class CustomerValidations
 		return CustomerType.valueOf(customerTypes.toUpperCase());
 	}
 	
+	public static Customer validateCustomerIndex(ArrayList<Customer> customer, String emailId, LocalDate date) throws CustomerHandlingException
+	{
+		Customer customer3=new Customer(emailId,date);
+		int index =customer.indexOf(customer3);
+		if(index<0)				
+			throw new CustomerHandlingException("No Record found..");
+		return customer.get(index);
+		
+		
+	}
+	
 	public static LocalDate parseDate(String date)
 	{
 		return parse(date);		
 	}
-
 }
