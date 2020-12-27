@@ -22,10 +22,10 @@ Create CustomerManagement class as a Tester
 package tester;
 import static utils.CustomerValidations.valdateAllInput;
 import static utils.CustomerValidations.parseDate;
+import static utils.CustomerValidations.validateCustomerIndex;
+
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 import customer.Customer;
@@ -62,7 +62,7 @@ public class CustomerManagement
 							case 2: System.out.println("------------------------------------------------------------------------------------");
 									System.out.println("ALL customer info .....");
 									for(Customer customer2:customer)
-											System.out.println(customer2.toString());
+											System.out.println(customer2);
 									break;
 									
 									/*
@@ -71,39 +71,22 @@ public class CustomerManagement
 									 * Return customer details , if found , otherwise display error mesg , via custom exception & catch block
 								     * API : indexOf , get
 									 */
-							case 3: boolean flag=false;
+							case 3:
 									System.out.println("------------------------------------------------------------------------------------");
 									System.out.println("Enter EmailId and DOB :");
-									Customer customer3=new Customer(sc.next(), parseDate(sc.next()));
-									System.out.println("Customer Details.....");
-									/*for (Customer customer2:customer) 
-									{
-										if(customer2.equals(customer3))
-										{
-											System.out.println("Customer info of enter id and DOB \n" +customer2);
-											System.out.println("Customer found at index "+customer.indexOf(customer2));
-											flag=true;
-											break;
-										}								
-									}*/
-									int i=-1;
-									Iterator<Customer> itr=customer.iterator();
-									while(itr.hasNext())
-									{
-										Customer c=itr.next();
-										if(c.equals(customer3))
-										{
-											i= customer.indexOf(c);
-											flag=true;
-										}
-									}
-									if ( i != -1 )
-										System.out.println(customer.get(i).toString()+"\n found at index: "+i);
-									if(!flag)
-										throw new CustomerHandlingException("No Record found..");
+									System.out.println("Customer Details.....\n"+validateCustomerIndex(customer,sc.next(), parseDate(sc.next())));
+									
+										/*
+										 * int i=-1; Iterator<Customer> itr=customer.iterator(); while(itr.hasNext()) {
+										 * Customer c=itr.next(); if(c.equals(customer3)) { i= customer.indexOf(c);
+										 * flag=true; } } if ( i != -1 )
+										 * System.out.println(customer.get(i).toString()+"\n found at index: "+i);
+										 * if(!flag) throw new CustomerHandlingException("No Record found..");
+										 */
 									break;
 						case 4:	
-								System.out.println("------------------------------------------------------------------------------------");System.out.println("Terminating bye !!!!!!!!!!");
+								System.out.println("------------------------------------------------------------------------------------");
+								System.out.println("Terminating bye !!!!!!!!!!");
 									exit=true;	
 									break;
 									
@@ -193,5 +176,4 @@ Choose Option..
 ------------------------------------------------------------------------------------
 Terminating bye !!!!!!!!!!
  */
- 
  
