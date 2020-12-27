@@ -132,9 +132,7 @@ public class CustomerValidations
 		int index =customer.indexOf(customer3);
 		if(index<0)				
 			throw new CustomerHandlingException("No Record found..");
-		return customer.get(index);
-		
-		
+		return customer.get(index);		
 	}
 	
 	public static LocalDate parseDate(String date)
