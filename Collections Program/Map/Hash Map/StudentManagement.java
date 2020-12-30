@@ -177,7 +177,9 @@ Option:
 5.Cancel Admission.
 6.Quit.
 3
-{EDAC102=Student [studentId=EDAC102, course=DBT, name=Vinod, marks=79.97, birthDate=1995-02-19], EDAC103=Student [studentId=EDAC103, course=WT, name=Rohit, marks=85.97, birthDate=1993-12-10], EDAC101=Student [studentId=EDAC101, course=DEVOPS, name=Samadhan, marks=75.97, birthDate=1997-02-19]}
+{EDAC102=Student [studentId=EDAC102, course=DBT, name=Vinod, marks=79.97, birthDate=1995-02-19],
+EDAC103=Student [studentId=EDAC103, course=WT, name=Rohit, marks=85.97, birthDate=1993-12-10],
+EDAC101=Student [studentId=EDAC101, course=DEVOPS, name=Samadhan, marks=75.97, birthDate=1997-02-19]}
 -------------------------------------------------------------------------------
 Option: 
 1.Student Admission.
