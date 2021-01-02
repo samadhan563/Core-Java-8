@@ -16,12 +16,12 @@ public class StreamForProduct
 	{
 		Scanner sc=new Scanner(System.in);
 		ArrayList<Product> products=populatedProduct(); 
-		System.out.println(" Enter cat name&price ");
+		System.out.println(" Enter cat name & price ");
 		String name=sc.next();
 		double price=sc.nextDouble();
 		
 		products.stream()
-		.filter(p->p.getProductCategory().equals(name) && p.getProductPrice()==price)
+		.filter(p->p.getProductCategory().equals(name)).filter(p-> p.getProductPrice()>=price)
 		.forEach(p->System.out.println("Product Name : "+p.getProductName()));
 		sc.close();
 	}
@@ -39,7 +39,9 @@ public class StreamForProduct
 }
 
 /* Output::
-Enter cat name&price 
+ Enter cat name & price 
 Classmate 30.20
 Product Name : Paper
+Product Name : Book
+
 */
